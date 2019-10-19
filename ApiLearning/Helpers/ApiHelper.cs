@@ -37,5 +37,14 @@ namespace ApiLearning.Helpers
 
             return baseUrl;
         }
+
+        // Makes sure _client has a client
+        protected RestClient CheckClient(RestClient client, string baseUrl)
+        {
+            if (client is null)
+                client = InitializeClient(baseUrl);
+
+            return client;
+        }
     }
 }

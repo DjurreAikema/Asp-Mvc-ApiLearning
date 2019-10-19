@@ -1,6 +1,6 @@
 ﻿namespace ApiLearning.Models
 {
-    public class UserInfo
+    public class TwitterUser
     {
         public string Name { get; set; }
         public string Screen_name { get; set; }

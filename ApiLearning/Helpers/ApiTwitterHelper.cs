@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using ApiLearning.Models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -30,7 +29,7 @@ namespace ApiLearning.Helpers
         }
 
         // Gets the specified user's information
-        public List<UserInfo> GetUserInfo(string[] parameters)
+        public List<TwitterUser> GetUserInfo(string[] parameters)
         {
             PreRequestCheck();
 
@@ -38,7 +37,7 @@ namespace ApiLearning.Helpers
             BuildHeader(32, _bearer, request);
             IRestResponse response = _client.Execute(request);
 
-            List<UserInfo> userInfo = JsonConvert.DeserializeObject<List<UserInfo>>(response.Content);
+            List<TwitterUser> userInfo = JsonConvert.DeserializeObject<List<TwitterUser>>(response.Content);
 
             return userInfo;
         }
@@ -46,7 +45,7 @@ namespace ApiLearning.Helpers
         // Sends Twitter specific request for bearer token
         private void GetBearerToken()
         {
-            CheckClient();
+            _client = CheckClient(_client, _baseUrl);
 
             var request = new RestRequest("/oauth2/token?grant_type=client_credentials", Method.POST);
 
@@ -71,15 +70,8 @@ namespace ApiLearning.Helpers
 
         private void PreRequestCheck()
         {
-            CheckClient();
+            _client = CheckClient(_client, _baseUrl);
             CheckBearer();
-        }
-
-        // Makes sure _client has a client
-        private void CheckClient()
-        {
-            if (_client is null)
-                _client = InitializeClient(_baseUrl);
         }
 
         // Makes sure _bearer has a token

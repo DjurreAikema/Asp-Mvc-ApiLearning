@@ -9,6 +9,6 @@ namespace ApiLearning.Models
     {
         public string Full_text { get; set; }
         public string Created_at { get; set; }
-        public UserInfo User { get; set; }
+        public TwitterUser User { get; set; }
     }
 }
