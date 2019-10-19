@@ -10,8 +10,10 @@ namespace ApiLearning.Controllers
 {
     public class TwitterController : Controller
     {
+        // Initialize an instance of the ApiTwitterHelper class to use 
         private ApiTwitterHelper twitter = new ApiTwitterHelper();
-        // GET: UserTimeline
+
+        // GET: Get the timeline of the selected used
         public ActionResult UserTimeline()
         {
             string[] parameters = { "screen_name=BarackObama", "tweet_mode=extended" };
@@ -20,6 +22,7 @@ namespace ApiLearning.Controllers
             return View(timeLineTweets);
         }
 
+        // Get: Get the user info of the selected user
         public ActionResult UserInfo()
         {
             string[] parameters = { "screen_name=BarackObama" };

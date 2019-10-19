@@ -21,8 +21,10 @@ namespace ApiLearning.Helpers
 
             var request = new RestRequest(BuildResource("/1.1/statuses/user_timeline.json?", parameters), Method.GET);
             BuildHeader(32, _bearer, request);
-            IRestResponse response = _client.Execute(request);
 
+            // Gets the response from the API request
+            IRestResponse response = _client.Execute(request);
+            //Parses the Json to a list of Tweet models
             List<Tweet> timelineTweets = JsonConvert.DeserializeObject<List<Tweet>>(response.Content);
 
             return timelineTweets;
@@ -35,8 +37,10 @@ namespace ApiLearning.Helpers
 
             var request = new RestRequest(BuildResource("/1.1/users/lookup.json?", parameters), Method.GET);
             BuildHeader(32, _bearer, request);
-            IRestResponse response = _client.Execute(request);
 
+            // Gets the response from the API request
+            IRestResponse response = _client.Execute(request);
+            //Parses the Json to a list of TwitterUser models
             List<TwitterUser> userInfo = JsonConvert.DeserializeObject<List<TwitterUser>>(response.Content);
 
             return userInfo;
@@ -53,8 +57,9 @@ namespace ApiLearning.Helpers
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Authorization", "Basic " + _token);
-            IRestResponse response = _client.Execute(request);
 
+            // Here we get the bearer token from the json response
+            IRestResponse response = _client.Execute(request);
             var deserialize = new JsonDeserializer();
             var output = deserialize.Deserialize<Dictionary<string, string>>(response);
             _bearer = output["access_token"];
@@ -68,6 +73,7 @@ namespace ApiLearning.Helpers
             request.AddHeader("Authorization", "Bearer " + bearer);
         }
 
+        // shortened check function
         private void PreRequestCheck()
         {
             _client = CheckClient(_client, _baseUrl);

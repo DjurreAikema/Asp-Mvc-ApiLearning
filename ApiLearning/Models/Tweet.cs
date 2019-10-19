@@ -8,7 +8,6 @@ namespace ApiLearning.Models
     public class Tweet
     {
         public string Full_text { get; set; }
-        public string Created_at { get; set; }
         public TwitterUser User { get; set; }
     }
 }

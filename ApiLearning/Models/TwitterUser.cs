@@ -6,7 +6,6 @@
         public string Screen_name { get; set; }
         public bool Verified { get; set; }
         public string Profile_image_url_https { get; set; }
-        public string Created_at { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
