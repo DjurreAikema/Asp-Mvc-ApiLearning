@@ -16,7 +16,7 @@ namespace ApiLearning.Helpers
         private RestClient _client;
 
         // Gets the specified user's timeline
-        private List<Tweet> GetUserTimeline(string[] parameters)
+        public List<Tweet> GetUserTimeline(string[] parameters)
         {
             PreRequestCheck();
 
