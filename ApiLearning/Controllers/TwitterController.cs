@@ -10,15 +10,22 @@ namespace ApiLearning.Controllers
 {
     public class TwitterController : Controller
     {
+        private ApiTwitterHelper twitter = new ApiTwitterHelper();
         // GET: UserTimeline
         public ActionResult UserTimeline()
         {
-            ApiTwitterHelper twitter = new ApiTwitterHelper();
-
             string[] parameters = { "screen_name=BarackObama", "tweet_mode=extended" };
             var timeLineTweets = twitter.GetUserTimeline(parameters);
 
             return View(timeLineTweets);
+        }
+
+        public ActionResult UserInfo()
+        {
+            string[] parameters = { "screen_name=BarackObama" };
+            var userInfo = twitter.GetUserInfo(parameters);
+
+            return View(userInfo);
         }
     }
 }

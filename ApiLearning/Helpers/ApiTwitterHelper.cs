@@ -22,11 +22,25 @@ namespace ApiLearning.Helpers
 
             var request = new RestRequest(BuildResource("/1.1/statuses/user_timeline.json?", parameters), Method.GET);
             BuildHeader(32, _bearer, request);
-
             IRestResponse response = _client.Execute(request);
+
             List<Tweet> timelineTweets = JsonConvert.DeserializeObject<List<Tweet>>(response.Content);
 
             return timelineTweets;
+        }
+
+        // Gets the specified user's information
+        public List<UserInfo> GetUserInfo(string[] parameters)
+        {
+            PreRequestCheck();
+
+            var request = new RestRequest(BuildResource("/1.1/users/lookup.json?", parameters), Method.GET);
+            BuildHeader(32, _bearer, request);
+            IRestResponse response = _client.Execute(request);
+
+            List<UserInfo> userInfo = JsonConvert.DeserializeObject<List<UserInfo>>(response.Content);
+
+            return userInfo;
         }
 
         // Sends Twitter specific request for bearer token
